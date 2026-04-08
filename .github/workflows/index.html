@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sciences Cognitives & Technologie 2024 — Zooms conceptuels</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bleu:    #0e2a45;
+  --bleu2:   #174a78;
+  --orange:  #d95f2b;
+  --or:      #c49a3c;
+  --vert:    #2a6e4a;
+  --violet:  #5a3a7a;
+  --rouge:   #8a1f2a;
+  --fond:    #f5f1ea;
+  --blanc:   #ffffff;
+  --texte:   #1c1c2e;
+  --gris:    #ede9e0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Atkinson Hyperlegible',sans-serif;background:var(--fond);color:var(--texte);font-size:15px;line-height:1.7;}
+
+/* ── HEADER ── */
+header{background:var(--bleu);color:#fff;padding:56px 40px 48px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(196,154,60,.10);}
+header::after{content:'';position:absolute;bottom:-50px;left:20%;width:260px;height:260px;border-radius:50%;background:rgba(217,95,43,.08);}
+.tag{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:20px;}
+header h1{font-family:'Bitter',serif;font-size:clamp(22px,4.5vw,38px);font-weight:900;line-height:1.2;margin-bottom:12px;max-width:750px;}
+header h1 em{color:var(--or);font-style:normal;}
+header .sub{font-size:13.5px;opacity:.75;max-width:600px;font-weight:400;line-height:1.6;}
+.prog-pill{display:inline-flex;align-items:center;gap:6px;margin-top:18px;background:rgba(196,154,60,.18);border:1px solid rgba(196,154,60,.5);color:var(--or);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;}
+
+/* ── NAV ── */
+nav.som{background:var(--bleu2);padding:16px 40px;display:flex;flex-wrap:wrap;gap:7px;}
+nav.som a{color:rgba(255,255,255,.78);text-decoration:none;font-size:11.5px;font-weight:700;letter-spacing:.4px;padding:5px 13px;border:1px solid rgba(255,255,255,.18);border-radius:18px;transition:all .2s;}
+nav.som a:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* ── MAIN ── */
+main{max-width:1000px;margin:0 auto;padding:48px 20px 90px;}
+
+/* ── TITRES SECTION ── */
+section{margin-bottom:64px;}
+.s-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:30px;}
+.s-num{font-family:'Bitter',serif;font-size:56px;font-weight:900;color:var(--or);opacity:.38;line-height:1;min-width:56px;}
+.s-title h2{font-family:'Bitter',serif;font-size:clamp(18px,2.8vw,25px);font-weight:700;color:var(--bleu);line-height:1.25;}
+.s-title p{font-size:11px;color:var(--orange);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+
+/* ── PROSE ── */
+.prose{font-size:14.5px;line-height:1.8;color:#2a2a3c;margin-bottom:20px;}
+.prose p{margin-bottom:13px;}
+.prose strong{color:var(--bleu);}
+
+/* ══════════════════════════════
+   ZOOM CARD — le composant clé
+══════════════════════════════ */
+.zoom-card{background:var(--blanc);border-radius:10px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 14px rgba(0,0,0,.07);border-left:5px solid var(--or);}
+.zoom-card.c-orange{border-left-color:var(--orange);}
+.zoom-card.c-bleu  {border-left-color:var(--bleu2);}
+.zoom-card.c-vert  {border-left-color:var(--vert);}
+.zoom-card.c-violet{border-left-color:var(--violet);}
+.zoom-card.c-rouge {border-left-color:var(--rouge);}
+
+/* Trigger (toujours visible) */
+.zoom-trigger{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;user-select:none;transition:background .2s;}
+.zoom-trigger:hover{background:var(--gris);}
+.zoom-icon{font-size:26px;flex-shrink:0;}
+.zoom-head{flex:1;}
+.zoom-head h3{font-family:'Bitter',serif;font-size:16px;font-weight:700;color:var(--bleu);}
+.zoom-head .auteur{font-size:11px;color:#888;font-weight:400;margin-top:2px;}
+.zoom-head .teaser{font-size:13px;color:#555;margin-top:4px;line-height:1.5;}
+.zoom-arrow{font-size:18px;color:var(--or);transition:transform .3s;flex-shrink:0;}
+.zoom-card.open .zoom-arrow{transform:rotate(180deg);}
+
+/* Corps dépliable */
+.zoom-body{display:none;padding:0 24px 24px;}
+.zoom-card.open .zoom-body{display:block;}
+
+/* Sous-blocs dans le zoom */
+.zb-section{margin-top:20px;}
+.zb-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding:4px 10px;border-radius:2px;display:inline-block;}
+.lb-science{background:#e8f0f8;color:var(--bleu2);}
+.lb-classe {background:#fde8df;color:#8a3000;}
+.lb-erreur {background:#f5e8ff;color:var(--violet);}
+.lb-exemple{background:#e0f5e8;color:var(--vert);}
+.lb-conseil{background:#fff6d5;color:#7a5500;}
+
+.zb-text{font-size:14px;line-height:1.75;color:#333;}
+.zb-text p{margin-bottom:10px;}
+.zb-text strong{color:var(--bleu);}
+.zb-text em{color:var(--orange);font-style:normal;font-weight:600;}
+
+/* Schéma ASCII / visuel simple */
+.schema{background:var(--fond);border:1px solid #ddd;border-radius:6px;padding:14px 16px;font-family:monospace;font-size:12.5px;line-height:1.8;color:#333;margin:10px 0;overflow-x:auto;}
+
+/* Citation officielle */
+.cite-off{border-left:3px solid var(--or);padding:10px 16px;background:#fffbe8;border-radius:0 6px 6px 0;font-size:13.5px;font-style:italic;color:#444;margin:12px 0;}
+.cite-off span{display:block;font-size:11px;color:#999;font-style:normal;margin-top:6px;font-weight:700;letter-spacing:.5px;}
+
+/* Alerte / attention */
+.alerte{background:#fff3f0;border:1px solid #f5bfb0;border-radius:6px;padding:12px 16px;font-size:13.5px;color:#6a2000;margin:10px 0;}
+.alerte::before{content:"⚠️  ";font-style:normal;}
+
+/* ── HIGHLIGHT BOX ── */
+.hbox{border-radius:10px;padding:26px 28px;margin:22px 0;}
+.hbox.dark{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;}
+.hbox.dark h3{font-family:'Bitter',serif;font-size:17px;font-weight:700;color:var(--or);margin-bottom:12px;}
+.hbox.dark li{font-size:14px;margin-bottom:7px;opacity:.9;padding-left:4px;}
+.hbox.dark ul{padding-left:18px;}
+.hbox.orange{background:linear-gradient(135deg,#8a2500,var(--orange));color:#fff;}
+.hbox.orange h3{font-family:'Bitter',serif;font-size:17px;font-weight:700;color:#ffe0c8;margin-bottom:12px;}
+.hbox.orange li{font-size:14px;margin-bottom:7px;opacity:.92;}
+.hbox.orange ul{padding-left:18px;}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin:18px 0;background:var(--blanc);border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.tbl thead{background:var(--bleu);color:#fff;}
+.tbl th{padding:12px 14px;text-align:left;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+.tbl td{padding:12px 14px;border-bottom:1px solid #eee;vertical-align:top;line-height:1.5;color:#333;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:nth-child(even){background:var(--gris);}
+
+/* ── BADGES ── */
+.b{display:inline-block;padding:3px 9px;border-radius:10px;font-size:11px;font-weight:700;}
+.b-or {background:#fdf0d5;color:#7a4d00;}
+.b-bl {background:#d8eaf5;color:#0e2a45;}
+.b-og {background:#fde8df;color:#8a2500;}
+.b-vt {background:#dff5e3;color:#1a5e30;}
+.b-vi {background:#ede8f5;color:#3a1a7a;}
+
+/* ── SPIRAL ── */
+.spiral{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;}
+.sp{background:var(--blanc);border-radius:8px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.sp.s5{border-top:4px solid var(--bleu2);}
+.sp.s4{border-top:4px solid var(--orange);}
+.sp.s3{border-top:4px solid var(--vert);}
+.sp h4{font-family:'Bitter',serif;font-size:14px;font-weight:700;color:var(--bleu);margin-bottom:8px;}
+.sp ul{padding-left:15px;}
+.sp li{font-size:13px;color:#444;margin-bottom:4px;line-height:1.4;}
+
+/* ── THEME BLOCK ── */
+.th-blk{background:var(--blanc);border-radius:10px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.08);margin-bottom:14px;}
+.th-blk .th-h{padding:14px 20px;font-family:'Bitter',serif;font-size:15px;font-weight:700;color:#fff;}
+.th-h.t1{background:var(--bleu);}
+.th-h.t2{background:var(--bleu2);}
+.th-h.t3{background:var(--vert);}
+.th-blk .th-b{padding:18px 20px;}
+.th-blk .th-b ul{padding-left:18px;}
+.th-blk .th-b li{font-size:13.5px;margin-bottom:7px;color:#333;line-height:1.5;}
+.cog-strip{margin-top:14px;padding-top:14px;border-top:1px dashed #ddd;}
+.cog-strip .cog-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
+
+/* ── DIVIDER ── */
+hr.div{border:none;height:1px;background:linear-gradient(to right,transparent,var(--or),transparent);margin:48px 0;opacity:.3;}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:28px 20px;background:var(--bleu);color:rgba(255,255,255,.4);font-size:11.5px;letter-spacing:.4px;}
+footer span{color:var(--or);}
+
+@media(max-width:640px){
+  .spiral{grid-template-columns:1fr;}
+  header{padding:40px 20px;}
+  nav.som{padding:14px 20px;}
+  main{padding:32px 16px 60px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Guide pédagogique · Collège</div>
+  <h1>Sciences Cognitives &amp;<br><em>Enseignement de la Technologie</em></h1>
+  <p class="sub">Zooms détaillés sur chaque concept cognitif — mécanismes, recherches, erreurs fréquentes et applications directes dans le programme cycle 4 (BO n°9, 29 février 2024).</p>
+  <div class="prog-pill">✓ Programme 2024 · Triptyque MEI · « Faire pour apprendre »</div>
+</header>
+
+<nav class="som">
+  <a href="#programme">Programme 2024</a>
+  <a href="#fondements">Fondements cognitifs ×6 zooms</a>
+  <a href="#faire">Faire pour apprendre</a>
+  <a href="#scenarisation">Scénariser</a>
+  <a href="#pedagogie">Pédagogies</a>
+  <a href="#gestion">Gestion de classe</a>
+  <a href="#themes">3 Thèmes × SC</a>
+  <a href="#synthese">Synthèse</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════
+     01 · PROGRAMME 2024
+══════════════════════════════════ -->
+<section id="programme">
+  <div class="s-head">
+    <div class="s-num">01</div>
+    <div class="s-title">
+      <p>Cadre institutionnel</p>
+      <h2>Le programme de technologie 2024 — ce qui change</h2>
+    </div>
+  </div>
+
+  <div class="cite-off">
+    « L'approche <strong>"faire pour apprendre et apprendre à faire"</strong> doit se dérouler au sein d'un laboratoire de technologie flexible et modulaire, disposant de matériels informatiques et de logiciels, de moyens de prototypage et de réalisation dans le cadre, par exemple, d'un atelier de fabrication collaboratif (FabLab). »
+    <span>BO n°9 du 29 février 2024 — Programme de technologie cycle 4</span>
+  </div>
+
+  <div class="prose">
+    <p>Le nouveau programme est structuré autour d'un <strong>triptyque central : Matière – Énergie – Information (MEI)</strong>. Tout objet ou système technique (OST) est analysé sous ce prisme. La logique par domaines est abandonnée au profit d'une <strong>progression spiralaire</strong> sur les 3 ans du cycle.</p>
+  </div>
+
+  <div class="spiral">
+    <div class="sp s5">
+      <h4>Thème 1 — Usages</h4>
+      <ul>
+        <li>Analyse externe des OST</li>
+        <li>Place, rôle, usages dans la société</li>
+        <li>Indice de réparabilité/durabilité</li>
+        <li>Cycle de vie, impacts</li>
+      </ul>
+    </div>
+    <div class="sp s4">
+      <h4>Thème 2 — Fonctionnement</h4>
+      <ul>
+        <li>Analyse interne des OST</li>
+        <li>Chaînes MEI, composants</li>
+        <li>Dépannage et réparation</li>
+        <li>Programmation d'une fonctionnalité</li>
+      </ul>
+    </div>
+    <div class="sp s3">
+      <h4>Thème 3 — Conception</h4>
+      <ul>
+        <li>Mini-projets et défis collaboratifs</li>
+        <li>FabLab, prototypage (3D, laser…)</li>
+        <li>IA, cybersécurité, expérience UX</li>
+        <li>Créativité valorisée</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="spiral" style="margin-top:8px;">
+    <div class="sp s5"><h4>5e — Rentrée 2024</h4><ul><li>Découverte OST, usages</li><li>Chaîne d'énergie — initiation</li><li>Circulation de l'information, IA</li><li>Réparation simple</li></ul></div>
+    <div class="sp s4"><h4>4e — Rentrée 2025</h4><ul><li>Analyse interne approfondie</li><li>Acquisition et structuration de données</li><li>Réseaux, cybersécurité</li><li>Mini-projet de conception</li></ul></div>
+    <div class="sp s3"><h4>3e — Rentrée 2026</h4><ul><li>Chaînes MEI — caractérisation</li><li>Modélisation, simulation</li><li>Nouvelle fonctionnalité + réparation</li><li>Projet collaboratif complet</li></ul></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     02 · FONDEMENTS COGNITIFS — ZOOMS
+══════════════════════════════════ -->
+<section id="fondements">
+  <div class="s-head">
+    <div class="s-num">02</div>
+    <div class="s-title">
+      <p>Socle théorique — cliquez sur chaque concept pour le déplier</p>
+      <h2>Les 6 principes cognitifs fondamentaux en technologie</h2>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Ces 6 principes issus des sciences cognitives ont des traductions directes en classe de technologie. Cliquez sur chacun pour accéder au <strong>zoom complet</strong> : mécanisme neurologique, résultats de recherche, erreurs fréquentes et applications concrètes.</p>
+  </div>
+
+  <!-- ── ZOOM 1 : Mémoire de travail ── -->
+  <div class="zoom-card c-bleu" id="z1">
+    <div class="zoom-trigger" onclick="toggle('z1')">
+      <div class="zoom-icon">🧠</div>
+      <div class="zoom-head">
+        <h3>La mémoire de travail et la charge cognitive</h3>
+        <div class="auteur">Baddeley &amp; Hitch (1974) · Sweller (1988) · Miller (1956)</div>
+        <div class="teaser">Pourquoi les élèves semblent "bloqués" face à une tâche complexe, même quand ils ont les connaissances nécessaires.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme — ce que dit la recherche</span>
+        <div class="zb-text">
+          <p>La mémoire de travail est l'espace mental dans lequel on <em>traite activement</em> les informations en cours. Elle est <strong>radicalement limitée</strong> : un adulte peut y maintenir simultanément 7 éléments (± 2) selon Miller, et des recherches plus récentes suggèrent même 4 éléments selon Cowan (2001).</p>
+          <p>Alan Baddeley a montré qu'elle fonctionne avec <strong>plusieurs sous-systèmes</strong> : une boucle phonologique (pour les sons et mots), un calepin visuospatial (pour les images et formes), et un administrateur central qui coordonne tout. Ces canaux sont <em>indépendants</em> : surcharger l'un n'affecte pas autant l'autre — c'est la base du dual-coding.</p>
+          <p>John Sweller a formalisé la <strong>théorie de la charge cognitive</strong> en distinguant trois types :</p>
+        </div>
+        <div class="schema">
+Charge INTRINSÈQUE    → complexité inhérente du contenu (ex : comprendre une chaîne MEI)
+Charge EXTRINSÈQUE    → liée à la mauvaise présentation (fiche mal faite, interface complexe)
+Charge GERMANE        → effort de construction du schéma mental (l'effort UTILE)
+
+Objectif pédagogique : réduire l'extrinsèque → libérer de l'espace pour le germane
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-classe">🖥️ Ce que ça change en classe de techno</span>
+        <div class="zb-text">
+          <p>La salle de technologie est <strong>l'environnement qui surcharge le plus facilement</strong> : logiciels à apprendre, schémas MEI, gestes techniques, consignes multiples, bruit du FabLab — tout arrive en même temps.</p>
+          <p>Quand la mémoire de travail est saturée, l'élève <em>ne peut plus traiter</em> de nouvelles informations. Il décroche, copie sans comprendre, ou s'agite. Ce n'est pas un problème de volonté — c'est une limite neurologique.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ Erreurs fréquentes qui saturent la mémoire de travail</span>
+        <div class="zb-text">
+          <ul style="padding-left:18px;">
+            <li style="margin-bottom:7px;">Introduire un nouveau logiciel (ex : FreeCAD, Scratch, logiciel de simulation) <strong>dans la même séance que la notion MEI</strong> → double nouveauté = double surcharge</li>
+            <li style="margin-bottom:7px;">Fiche d'activité avec 8 questions visibles simultanément → l'élève ne sait pas où aller</li>
+            <li style="margin-bottom:7px;">Cours oral long + consignes d'activité données verbalement sans support écrit → canal phonologique saturé</li>
+            <li style="margin-bottom:7px;">Travail de groupe sans rôles définis → charge décisionnelle s'ajoute à la charge cognitive</li>
+          </ul>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Leviers concrets</span>
+        <div class="zb-text">
+          <p><strong>Fragmenter :</strong> une seule nouveauté par séance. Si la séance porte sur la chaîne d'énergie, le logiciel de simulation utilisé doit être déjà connu des élèves.</p>
+          <p><strong>Cacher ce qui n'est pas encore utile :</strong> distribuer les étapes de la fiche une par une (ou masquer les suivantes).</p>
+          <p><strong>Séparer les canaux :</strong> ne pas lire à voix haute un texte projeté en même temps — ça surcharge le canal phonologique sur deux sources simultanées.</p>
+          <p><strong>Automatiser les gestes :</strong> un geste technique répété 10 fois ne consomme presque plus de mémoire de travail — il passe en mémoire procédurale. C'est pourquoi les routines de labo (sécurité, rangement) libèrent du traitement pour les apprentissages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZOOM 2 : Répétition espacée ── -->
+  <div class="zoom-card c-orange" id="z2">
+    <div class="zoom-trigger" onclick="toggle('z2')">
+      <div class="zoom-icon">🔁</div>
+      <div class="zoom-head">
+        <h3>La répétition espacée et l'oubli productif</h3>
+        <div class="auteur">Ebbinghaus (1885) · Cepeda et al. (2006) · Roediger &amp; Karpicke (2006)</div>
+        <div class="teaser">Pourquoi réviser la veille est inefficace, et comment le programme spiralaire 2024 est biologiquement fondé.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>Hermann Ebbinghaus a établi dès 1885 la <strong>courbe de l'oubli</strong> : sans révision, on oublie ~50% d'une information en 1 heure, ~70% en 24h, ~90% en une semaine. Ce n'est pas un défaut du cerveau — c'est un mécanisme d'économie : le cerveau efface ce qui ne semble pas récurrent.</p>
+          <p>La recherche moderne montre que <strong>réapprendre juste avant d'oublier</strong> est le moment optimal pour consolider. Chaque récupération réussie renforce la connexion synaptique ET allonge l'intervalle avant le prochain oubli. C'est la <em>répétition espacée</em>.</p>
+        </div>
+        <div class="schema">
+Mémorisation sans espacement :
+  J1 ████████  J2 ▓▓▓▓▓  J3 ▓▓  J4 ▓  J7 ·  → oubli rapide
+
+Mémorisation avec espacement (J1 → J3 → J7 → J14) :
+  J1 ████████  J3 ████████████  J7 ██████████████████  → trace durable
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-classe">🖥️ Lien direct avec le programme spiralaire 2024</span>
+        <div class="zb-text">
+          <p>La logique spiralaire 5e → 4e → 3e du programme 2024 est <strong>biologiquement fondée</strong> : les notions MEI reviennent à intervalles croissants sur 3 ans. La chaîne d'énergie vue en 5e est réactivée et approfondie en 4e, puis encore en 3e avec la modélisation.</p>
+          <p>C'est exactement le schéma optimal pour la mémorisation à long terme — à condition que les séances de réactivation soient <em>explicites</em> : rappeler le lien avec ce qui a été vu, ne pas traiter comme si c'était nouveau.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ Ce qui sabote la répétition espacée</span>
+        <div class="zb-text">
+          <ul style="padding-left:18px;">
+            <li style="margin-bottom:6px;">Commencer chaque séquence sans rappel → l'élève repart de zéro, la spirale ne fonctionne pas</li>
+            <li style="margin-bottom:6px;">Travailler une notion pendant 3 séances consécutives intenses puis ne plus y revenir → cramming sans espacement</li>
+            <li style="margin-bottom:6px;">Ne jamais tester → la relecture passive crée une illusion de savoir (fluency illusion) sans consolider</li>
+          </ul>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ En pratique</span>
+        <div class="zb-text">
+          <p><strong>Quiz de rappel MEI en ouverture :</strong> 3 à 5 questions sur la séance précédente, sans support. Ce n'est pas une évaluation — c'est un acte d'apprentissage. La récupération elle-même consolide la mémoire (testing effect).</p>
+          <p><strong>Relier explicitement :</strong> "En 5e vous avez vu la chaîne d'énergie d'un vélo. Aujourd'hui en 4e on va retrouver cette même logique dans un système plus complexe…"</p>
+          <p><strong>Portfolio MEI progressif :</strong> une fiche mémo par OST étudié, que l'élève retrouve et complète à chaque niveau — trace physique de la spirale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZOOM 3 : Encodage élaboré ── -->
+  <div class="zoom-card c-vert" id="z3">
+    <div class="zoom-trigger" onclick="toggle('z3')">
+      <div class="zoom-icon">🔗</div>
+      <div class="zoom-head">
+        <h3>L'encodage élaboré et les connaissances antérieures</h3>
+        <div class="auteur">Ausubel (1963) · Craik &amp; Lockhart (1972)</div>
+        <div class="teaser">Pourquoi partir d'un objet familier n'est pas juste une "accroche" — c'est le mécanisme biologique central de l'apprentissage.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>David Ausubel (1963) : <em>"Si je devais réduire toute la psychologie de l'éducation à un seul principe, je dirais ceci : le facteur le plus important influençant l'apprentissage est ce que l'apprenant sait déjà."</em></p>
+          <p>Le cerveau encode les nouvelles informations en les <strong>connectant à des réseaux de connaissances existants</strong>. Plus les connexions sont nombreuses et profondes, plus la trace mémorielle est solide et durable. Craik et Lockhart ont mesuré que le traitement "profond" (relier à du sens, du vécu, des exemples) produit une rétention <strong>3 à 4 fois supérieure</strong> au traitement superficiel (lire, répéter).</p>
+          <p>Un concept sans ancrage préalable flotte dans le vide — il sera oublié en quelques heures. C'est le cas quand on enseigne la <em>chaîne d'énergie</em> de façon abstraite, sur tableau, sans objet réel.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-exemple">📱 Exemple concret en techno 5e</span>
+        <div class="zb-text">
+          <p><strong>Mauvaise approche :</strong> "La chaîne d'énergie comprend une source, un distributeur, un convertisseur et un effecteur." → abstrait, aucun ancrage.</p>
+          <p><strong>Bonne approche :</strong> Poser un drone sur la table. "Vous connaissez tous les drones. Quand il vole, il consomme quoi ? D'où vient cette énergie ? Qu'est-ce qui la transforme ? Qu'est-ce que ça produit comme effet ?"  Puis formaliser : "Ce chemin que vous venez de décrire, ça s'appelle la chaîne d'énergie." → le concept s'ancre sur du vécu.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Leviers concrets</span>
+        <div class="zb-text">
+          <p><strong>Toujours commencer par "Vous connaissez… ?"</strong> avant d'introduire un nouveau concept MEI. Activer ce que les élèves savent AVANT d'apporter ce qu'ils ne savent pas.</p>
+          <p><strong>Choisir les OST support avec soin :</strong> le programme 2024 demande des objets "proches du quotidien des élèves" — c'est une prescription cognitive, pas juste de la motivation.</p>
+          <p><strong>Faire reformuler avec leurs propres mots :</strong> "Explique la chaîne d'énergie de ce drone à ton voisin comme si tu lui expliquais à la récré" → oblige à encoder dans son propre réseau conceptuel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZOOM 4 : Effet de testing ── -->
+  <div class="zoom-card c-violet" id="z4">
+    <div class="zoom-trigger" onclick="toggle('z4')">
+      <div class="zoom-icon">🎯</div>
+      <div class="zoom-head">
+        <h3>L'effet de testing (testing effect / retrieval practice)</h3>
+        <div class="auteur">Roediger &amp; Karpicke (2006) · Bjork (1994)</div>
+        <div class="teaser">Se tester est bien plus efficace que relire — et pourtant c'est la pratique d'étude la moins utilisée.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>Roediger et Karpicke (2006) ont comparé différentes stratégies d'apprentissage : relire, faire des résumés, ou se tester. Résultat : les élèves qui se testaient régulièrement obtenaient <strong>+50% de mémorisation</strong> une semaine plus tard par rapport à ceux qui relisaient simplement.</p>
+          <p>Le paradoxe : l'acte de <em>récupérer</em> une information dans la mémoire — même si on échoue partiellement — est lui-même un acte d'apprentissage. L'effort de récupération crée et renforce les connexions synaptiques bien plus que la passivité.</p>
+          <p>Robert Bjork parle de <strong>"désirables difficultés"</strong> : introduire des obstacles de récupération (se tester sans support, interleaving, varier les contextes) améliore la mémorisation à long terme même si cela réduit la performance immédiate. L'élève qui galère un peu retient mieux que celui à qui on facilite tout.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ L'illusion de fluence — le piège principal</span>
+        <div class="zb-text">
+          <p>Quand un élève relit sa fiche sur la chaîne MEI, le texte lui <em>semble</em> familier, il pense maîtriser. C'est la <strong>fluency illusion</strong> : la reconnaissance (passive) est confondue avec le rappel (actif). Le test qui révèle qu'il ne sait rien reproduire de mémoire est souvent un choc.</p>
+          <div class="alerte">Ne jamais valider "j'ai lu ma fiche" comme une preuve de savoir. Valider uniquement ce que l'élève peut produire sans support.</div>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ En pratique en technologie</span>
+        <div class="zb-text">
+          <p><strong>Quiz MEI d'ouverture (5 min) :</strong> "Sans regarder tes notes, cite les 3 composants de la chaîne d'énergie du drone." Ce rituel est le levier de mémorisation le plus puissant disponible.</p>
+          <p><strong>Schéma MEI à reconstituer :</strong> distribuer un schéma incomplet de chaîne d'énergie ou d'information à compléter sans support — plus efficace que de regarder le schéma complet.</p>
+          <p><strong>Exit ticket :</strong> en fin de séance, l'élève note sur un post-it : "Ce que j'ai appris : … / Ce que je ne comprends pas encore : …" → récupération + métacognition simultanées.</p>
+          <p><strong>Interleaving :</strong> mélanger intentionnellement les questions de la séance du jour avec des questions de séances précédentes → oblige à discriminer et consolide davantage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZOOM 5 : Dual-coding ── -->
+  <div class="zoom-card" id="z5">
+    <div class="zoom-trigger" onclick="toggle('z5')">
+      <div class="zoom-icon">🖼️</div>
+      <div class="zoom-head">
+        <h3>Le dual-coding — double encodage visuel et verbal</h3>
+        <div class="auteur">Paivio (1971) · Mayer (2001) — Théorie cognitive de l'apprentissage multimédia</div>
+        <div class="teaser">Associer image et texte n'est pas juste esthétique — c'est une double trace mémorielle dans deux systèmes indépendants.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>Allan Paivio a démontré que le cerveau dispose de <strong>deux systèmes d'encodage indépendants</strong> : un système verbal (mots, symboles) et un système imagique (images, formes, diagrammes). Une information encodée dans les deux systèmes a <em>deux chemins de récupération</em> — donc une probabilité de rappel bien plus élevée.</p>
+          <p>Richard Mayer a prolongé ce travail avec sa <strong>théorie cognitive de l'apprentissage multimédia</strong> (2001). Ses expériences montrent que les apprenants retiennent mieux quand texte et image sont présentés ensemble ET que l'image est pertinente (pas décorative). Mais attention : image + texte simultanés à l'oral surchargent si les deux canaux disent exactement la même chose (effet de redondance).</p>
+        </div>
+        <div class="schema">
+Canal verbal  : "La batterie fournit de l'énergie électrique au moteur"
+Canal imagique: [schéma de la chaîne d'énergie avec flèches et pictogrammes]
+
+→ Deux traces indépendantes en mémoire → double chance de récupération
+→ Elles se renforcent mutuellement lors de la récupération
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ Les pièges classiques du dual-coding</span>
+        <div class="zb-text">
+          <ul style="padding-left:18px;">
+            <li style="margin-bottom:6px;"><strong>Trop d'images décoratives :</strong> une image qui n'apporte pas d'information sur le contenu MEI ne crée pas de double encodage — elle distrait</li>
+            <li style="margin-bottom:6px;"><strong>Lire le texte projeté à voix haute :</strong> deux canaux verbaux identiques (yeux + oreilles) → effet de redondance → surcharge sans bénéfice</li>
+            <li style="margin-bottom:6px;"><strong>Schéma incompréhensible :</strong> un schéma MEI trop complexe non annoté ne se connecte à rien — il surcharge le canal imagique sans ancrage</li>
+          </ul>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ En pratique en technologie</span>
+        <div class="zb-text">
+          <p><strong>Schéma MEI + légende textuelle :</strong> toujours associer le schéma de chaîne d'énergie ou d'information à ses labels écrits. L'un sans l'autre est moins efficace.</p>
+          <p><strong>Faire dessiner par les élèves eux-mêmes :</strong> tracer soi-même le schéma MEI à partir des explications orales est l'acte de dual-coding le plus puissant — les deux canaux sont activés en même temps et l'élève est acteur.</p>
+          <p><strong>Vidéo + narration complémentaire (pas redondante) :</strong> une vidéo montrant le fonctionnement d'un moteur électrique avec une narration qui explique POURQUOI (et non ce qu'on voit déjà) est plus efficace qu'une vidéo muette ou qu'une vidéo dont le texte décrit les images.</p>
+          <p><strong>Infographie MEI murale :</strong> un poster permanent dans la salle montrant les 3 dimensions MEI sous forme visuelle sert d'ancrage spatial (les élèves situent leurs nouvelles connaissances dans cet espace visuel).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ZOOM 6 : Métacognition ── -->
+  <div class="zoom-card c-rouge" id="z6">
+    <div class="zoom-trigger" onclick="toggle('z6')">
+      <div class="zoom-icon">🤔</div>
+      <div class="zoom-head">
+        <h3>La métacognition — apprendre à apprendre</h3>
+        <div class="auteur">Flavell (1979) · Hattie &amp; Timperley (2007) · Dehaene (2018)</div>
+        <div class="teaser">L'élève qui sait ce qu'il comprend et ce qu'il ne comprend pas apprend significativement mieux — c'est mesurable.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>John Flavell a défini la métacognition comme <strong>"la connaissance qu'on a de ses propres processus cognitifs"</strong>. Elle comprend deux composantes : la <em>connaissance métacognitive</em> (savoir comment on apprend, quelles stratégies marchent pour soi) et le <em>contrôle métacognitif</em> (surveiller sa propre compréhension en temps réel et ajuster).</p>
+          <p>John Hattie, dans sa méta-analyse portant sur 800 méta-analyses (2009), place les stratégies métacognitives parmi les <strong>interventions pédagogiques les plus efficaces</strong> (d = 0,60). Stanislas Dehaene souligne que l'élève actif — qui monitore sa propre compréhension — apprend jusqu'à <em>deux fois plus vite</em> que l'élève passif.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ Le biais de confiance — obstacle principal</span>
+        <div class="zb-text">
+          <p>Les élèves les plus faibles ont tendance à <strong>surestimer leur compréhension</strong> (effet Dunning-Kruger) : ils pensent avoir compris la chaîne MEI parce qu'ils ont suivi la démonstration. Les élèves les plus forts sous-estiment parfois les lacunes dans des points précis.</p>
+          <div class="alerte">La question "Vous avez compris ?" ne fonctionne pas : presque tout le monde répond oui. Remplacer par une tâche de production qui révèle réellement le niveau de compréhension.</div>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ En pratique en technologie</span>
+        <div class="zb-text">
+          <p><strong>Journal d'apprentissage MEI :</strong> à la fin de chaque séance, l'élève note sur 3 lignes : "Ce que je sais faire maintenant / Ce que je ne comprends pas encore / Ce que je vais faire pour y remédier."</p>
+          <p><strong>Feux tricolores :</strong> chaque élève indique en fin d'activité son niveau de maîtrise sur le concept MEI travaillé (vert / orange / rouge). Permet au prof d'ajuster en temps réel ET entraîne l'élève à s'auto-évaluer.</p>
+          <p><strong>Expliquer à un pair :</strong> "Explique la chaîne d'information de ce capteur à ton voisin." L'acte d'expliquer révèle immédiatement à l'élève ce qu'il maîtrise vraiment — et ce qu'il croyait maîtriser.</p>
+          <p><strong>Checklist de conception :</strong> en Thème 3, donner aux élèves une checklist de critères (fonctionnel ? MEI bien identifié ? réparabilité pensée ?) qu'ils cochent eux-mêmes avant la validation du prof.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     03 · FAIRE POUR APPRENDRE
+══════════════════════════════════ -->
+<section id="faire">
+  <div class="s-head">
+    <div class="s-num">03</div>
+    <div class="s-title">
+      <p>Principe fondateur du programme 2024</p>
+      <h2>« Faire pour apprendre et apprendre à faire » — lecture cognitive</h2>
+    </div>
+  </div>
+
+  <div class="cite-off">
+    « Créer, concevoir, réaliser dans le cadre de projets pour <strong>restaurer le plaisir d'apprendre</strong> et choisir son orientation. Apporter un sens pratique à des notions théoriques, un enseignement à la rencontre des autres disciplines. »
+    <span>Guide d'accompagnement Éduscol · Programme technologie cycle 4 · Mai 2024</span>
+  </div>
+
+  <!-- Zoom Embodied cognition -->
+  <div class="zoom-card c-vert" id="z7">
+    <div class="zoom-trigger" onclick="toggle('z7')">
+      <div class="zoom-icon">🤲</div>
+      <div class="zoom-head">
+        <h3>La cognition incarnée (Embodied cognition)</h3>
+        <div class="auteur">Lakoff &amp; Johnson (1999) · Wilson (2002) · Glenberg (2010)</div>
+        <div class="teaser">Pourquoi manipuler physiquement un objet technique ancre les concepts MEI bien mieux qu'un schéma sur tableau.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>La cognition incarnée (<em>embodied cognition</em>) est le courant de recherche qui montre que la <strong>pensée n'est pas abstraite et déconnectée du corps</strong> — elle est profondément ancrée dans les expériences sensori-motrices. Comprendre "circuit électrique" s'appuie en partie sur la simulation mentale du geste de câbler.</p>
+          <p>Glenberg (2010) a montré que les élèves qui <em>manipulent</em> des objets pour apprendre un concept comprennent et retiennent significativement mieux que ceux qui lisent ou écoutent des explications. Le canal sensoriel (toucher, vision directe, proprioception) crée une <strong>trace mémorielle supplémentaire</strong> et plus durable.</p>
+          <p>C'est la justification scientifique du FabLab dans le programme 2024 : ce n'est pas une activité "occupationnelle" — c'est un dispositif d'encodage cognitif supérieur.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-exemple">⚙️ Application directe : dépannage et réparation (Thème 2)</span>
+        <div class="zb-text">
+          <p>La compétence "réparation" introduite dans le programme 2024 est <strong>idéale sur le plan cognitif</strong> : l'élève manipule un objet réel défectueux, identifie physiquement le dysfonctionnement, teste des solutions, observe les effets. Chaque sens est engagé — la trace mémorielle du concept MEI mis en jeu est incomparablement plus riche qu'un exercice sur fiche.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Leviers concrets</span>
+        <div class="zb-text">
+          <p><strong>Manipuler avant d'abstraire :</strong> donner l'objet ou le sous-ensemble aux élèves AVANT d'introduire les concepts. Laisser 5 minutes d'observation libre — "Qu'est-ce que vous remarquez ? Qu'est-ce qui vous étonne ?"</p>
+          <p><strong>Sketching à la main avant le logiciel CAO :</strong> dessiner à la main l'esquisse d'une pièce avant de la modéliser en 3D active la cognition incarnée et réduit la charge cognitive lors du passage au logiciel.</p>
+          <p><strong>FabLab comme espace cognitif, pas juste technique :</strong> intégrer des moments de verbalisation pendant la fabrication — "Dis-moi ce que tu fais ET pourquoi" — couple le faire et le nommer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zoom Conflit cognitif -->
+  <div class="zoom-card c-orange" id="z8">
+    <div class="zoom-trigger" onclick="toggle('z8')">
+      <div class="zoom-icon">⚡</div>
+      <div class="zoom-head">
+        <h3>Le conflit cognitif — moteur de la reconstruction</h3>
+        <div class="auteur">Piaget (1950) · Doise &amp; Mugny (1981)</div>
+        <div class="teaser">Quand le prototype ne fonctionne pas, le cerveau est forcé de réviser ses représentations — c'est le moment d'apprentissage le plus puissant.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>Jean Piaget a décrit l'apprentissage comme un équilibre entre <strong>assimilation</strong> (intégrer du nouveau dans les schémas existants) et <strong>accommodation</strong> (modifier ses schémas quand ils ne fonctionnent plus). Le moteur de l'accommodation, c'est le <em>déséquilibre cognitif</em> : quand la réalité contredit nos représentations.</p>
+          <p>En technologie, ce déséquilibre se produit naturellement et constamment : le programme ne s'exécute pas comme prévu, la pièce imprimée en 3D n'entre pas dans l'assemblage, le circuit électrique ne s'allume pas. Ces moments de "ça ne marche pas" sont <strong>les moments d'apprentissage les plus riches</strong> — à condition qu'ils soient exploités pédagogiquement et non noyés dans la frustration.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ L'erreur pédagogique fréquente</span>
+        <div class="zb-text">
+          <p>Trop souvent, face à l'erreur d'un élève, le réflexe est de donner la réponse correcte immédiatement. Cela <strong>court-circuite le conflit cognitif</strong> et prive l'élève du travail de reconstruction. L'élève reçoit la solution sans avoir vécu le processus de révision de ses représentations — il ne retient rien.</p>
+          <div class="alerte">Ne pas donner la réponse face à une erreur. Poser plutôt : "Qu'est-ce qui te permet de dire ça ? Qu'est-ce que tu observes qui ne correspond pas à ce que tu attendais ?"</div>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Exploiter le conflit cognitif en techno</span>
+        <div class="zb-text">
+          <p><strong>Concevoir des situations qui "rateront" intentionnellement :</strong> un programme avec un bug connu à déboguer, une pièce avec une cote légèrement fausse à corriger, un circuit avec un composant défectueux à identifier.</p>
+          <p><strong>Protocole de dépannage structuré :</strong> face à un dysfonctionnement : (1) Décrire précisément ce qui se passe vs ce qui devrait se passer → (2) Formuler une hypothèse → (3) Tester → (4) Conclure. Ce protocole <em>fait travailler le conflit cognitif</em> plutôt que de le fuir.</p>
+          <p><strong>Valoriser verbalement :</strong> "Cette erreur est intéressante — qu'est-ce qu'elle nous apprend sur le fonctionnement du système ?" Installer culturellement l'idée que l'erreur est une information.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     04 · SCÉNARISATION
+══════════════════════════════════ -->
+<section id="scenarisation">
+  <div class="s-head">
+    <div class="s-num">04</div>
+    <div class="s-title">
+      <p>Design de séquence</p>
+      <h2>Scénariser une séquence avec les sciences cognitives</h2>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Temps</th><th>Principe cognitif</th><th>En classe de techno (programme 2024)</th><th>Durée</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Activation</strong></td>
+        <td><span class="b b-or">Connaissances antérieures</span></td>
+        <td>Quiz MEI de rappel, objet familier posé sur la table, carte mentale "ce que tu sais sur cet OST"</td>
+        <td>5–8 min</td>
+      </tr>
+      <tr>
+        <td><strong>2. Situation-problème</strong></td>
+        <td><span class="b b-og">Conflit cognitif</span></td>
+        <td>OST en panne, besoin local identifié, défi collaboratif — ancré dans le réel</td>
+        <td>5–10 min</td>
+      </tr>
+      <tr>
+        <td><strong>3. Faire d'abord</strong></td>
+        <td><span class="b b-vt">Embodied cognition</span></td>
+        <td>Manipulation, démontage, test, observation — AVANT tout apport de cours</td>
+        <td>10–20 min</td>
+      </tr>
+      <tr>
+        <td><strong>4. Nommer ce qu'on a fait</strong></td>
+        <td><span class="b b-bl">Encodage élaboré + dual-coding</span></td>
+        <td>Cours court (≤10 min) qui formalise les concepts MEI vécus. Schéma + légende simultanés.</td>
+        <td>8–12 min</td>
+      </tr>
+      <tr>
+        <td><strong>5. Pratique guidée</strong></td>
+        <td><span class="b b-bl">Charge cognitive contrôlée</span></td>
+        <td>Activité structurée étape par étape, scaffolding, modèle à compléter, feedback immédiat</td>
+        <td>15–25 min</td>
+      </tr>
+      <tr>
+        <td><strong>6. Pratique autonome</strong></td>
+        <td><span class="b b-vi">Désirable difficulté</span></td>
+        <td>Projet, défi de conception, réparation à diagnostiquer — sans procédure imposée</td>
+        <td>15–30 min</td>
+      </tr>
+      <tr>
+        <td><strong>7. Métacognition + récupération</strong></td>
+        <td><span class="b b-or">Testing effect + répétition espacée</span></td>
+        <td>Exit ticket MEI (5 min) + quiz de rappel en ouverture de la séance suivante</td>
+        <td>5 min + 5 min J+1</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     05 · PÉDAGOGIES
+══════════════════════════════════ -->
+<section id="pedagogie">
+  <div class="s-head">
+    <div class="s-num">05</div>
+    <div class="s-title">
+      <p>Approches didactiques</p>
+      <h2>Pédagogies efficaces — ce que dit la recherche</h2>
+    </div>
+  </div>
+
+  <!-- Zoom pédagogie explicite -->
+  <div class="zoom-card c-bleu" id="z9">
+    <div class="zoom-trigger" onclick="toggle('z9')">
+      <div class="zoom-icon">🧩</div>
+      <div class="zoom-head">
+        <h3>La pédagogie explicite (Rosenshine)</h3>
+        <div class="auteur">Rosenshine (2012) · Hattie (2009) · Gauthier et al. (2013)</div>
+        <div class="teaser">La pédagogie la plus efficace pour les procédures techniques et la programmation — souvent mal comprise, souvent confondue avec le cours magistral.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme</span>
+        <div class="zb-text">
+          <p>Barak Rosenshine a synthétisé des décennies de recherche sur l'efficacité pédagogique en 10 principes. La pédagogie explicite n'est <strong>pas un cours magistral</strong> — c'est un enseignement structuré en 3 phases :</p>
+        </div>
+        <div class="schema">
+Phase 1 — JE FAIS (modelage)
+  Le prof réalise la tâche à voix haute en verbalisant son raisonnement
+  Ex : "Je câble ce circuit. D'abord je cherche la source d'énergie…"
+
+Phase 2 — ON FAIT ENSEMBLE (pratique guidée)
+  L'élève réalise, le prof est présent, corrige en temps réel
+  Le support est encore visible. Questions fréquentes du prof.
+
+Phase 3 — TU FAIS SEUL (pratique autonome)
+  L'élève réalise sans aide. Le prof observe, n'intervient qu'en cas de blocage total.
+  Le support est progressivement retiré.
+        </div>
+        <div class="zb-text">
+          <p>Cette progression correspond exactement à la <strong>zone proximale de développement</strong> de Vygotski : l'élève est toujours légèrement au-delà de ce qu'il peut faire seul, accompagné par l'étayage (scaffolding) de l'enseignant.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-erreur">❌ Idée reçue à déconstruire</span>
+        <div class="zb-text">
+          <p>La pédagogie explicite est parfois assimilée à tort à un enseignement transmissif passif. C'est l'inverse : elle demande une <strong>interaction très dense</strong> entre prof et élève, un questionnement constant, et une progression rigoureusement contrôlée de la difficulté.</p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Quand l'utiliser en technologie 2024</span>
+        <div class="zb-text">
+          <p>La pédagogie explicite est <strong>indispensable</strong> pour : les gestes techniques (soudure, câblage, découpe laser), la prise en main d'un logiciel (FreeCAD, Scratch, Arduino IDE), les procédures de sécurité du labo, le protocole de dépannage MEI.</p>
+          <p>Elle n'est <em>pas adaptée</em> à la phase de créativité du Thème 3 (conception libre) — là, c'est l'apprentissage par projet qui prend le relais.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hbox dark">
+    <h3>📊 Efficacité mesurée — méta-analyses Hattie (2009)</h3>
+    <ul>
+      <li><strong>Feedback immédiat</strong> (d = 0,73) — corriger pendant l'activité, en temps réel, sur la tâche en cours</li>
+      <li><strong>Enseignement explicite</strong> (d = 0,57) — modelage → guidé → autonome</li>
+      <li><strong>Apprentissage coopératif structuré</strong> (d = 0,59) — groupes avec rôles clairs, pas libre</li>
+      <li><strong>Métacognition</strong> (d = 0,60) — apprendre aux élèves à monitorer leur propre compréhension</li>
+      <li><strong>Apprentissage par projet bien structuré</strong> (d = 0,35 à 0,56) — efficace si les jalons et le feedback sont présents</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     06 · GESTION DE CLASSE
+══════════════════════════════════ -->
+<section id="gestion">
+  <div class="s-head">
+    <div class="s-num">06</div>
+    <div class="s-title">
+      <p>Environnement d'apprentissage</p>
+      <h2>Gestion de classe éclairée par les sciences cognitives</h2>
+    </div>
+  </div>
+
+  <!-- Zoom amygdale / sécurité -->
+  <div class="zoom-card c-rouge" id="z10">
+    <div class="zoom-trigger" onclick="toggle('z10')">
+      <div class="zoom-icon">😌</div>
+      <div class="zoom-head">
+        <h3>Sécurité psychologique et amygdale — la condition neurobiologique</h3>
+        <div class="auteur">LeDoux (1996) · Immordino-Yang (2016) · Dehaene (2018)</div>
+        <div class="teaser">Un élève stressé ou humilié active son amygdale — ce qui bloque littéralement l'accès au cortex préfrontal, la zone qui raisonne.</div>
+      </div>
+      <div class="zoom-arrow">▼</div>
+    </div>
+    <div class="zoom-body">
+      <div class="zb-section">
+        <span class="zb-label lb-science">🔬 Le mécanisme neurobiologique</span>
+        <div class="zb-text">
+          <p>L'amygdale est le centre de traitement des émotions de peur et de menace sociale. Quand elle s'active fortement (peur d'être interrogé, peur du jugement des pairs, honte face à une erreur), elle <strong>court-circuite le cortex préfrontal</strong> — la zone qui permet le raisonnement, la résolution de problèmes et la conception.</p>
+          <p>Joseph LeDoux a décrit ce phénomène comme le <em>"détournement amygdalien"</em>. Mary Helen Immordino-Yang a montré que les émotions positives — curiosité, plaisir de réussir, sentiment de sécurité — activent les mêmes réseaux neuronaux que l'apprentissage profond. <strong>On n'apprend bien que dans un état émotionnel favorable.</strong></p>
+        </div>
+        <div class="schema">
+MENACE PERÇUE (peur d'échouer, d'être jugé)
+    ↓
+Activation amygdale
+    ↓
+Cortisol élevé → inhibition cortex préfrontal
+    ↓
+Incapacité à raisonner, concevoir, résoudre un problème
+
+SÉCURITÉ + CURIOSITÉ
+    ↓
+Dopamine + sérotonine
+    ↓
+Cortex préfrontal actif
+    ↓
+Apprentissage profond possible
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-classe">🖥️ Ce que ça change en labo de technologie</span>
+        <div class="zb-text">
+          <p>En technologie, les occasions de stress sont nombreuses : manipuler un outil devant les autres, programmer sans y arriver, avoir un projet qui "rate". La <strong>culture de l'erreur</strong> n'est pas un discours bienveillant — c'est une nécessité neurobiologique pour que les élèves puissent utiliser leur cortex préfrontal.</p>
+          <p>La phrase-cadre à installer : <em>"Dans ce labo, l'erreur est une information sur le système, pas un jugement sur toi."</em></p>
+        </div>
+      </div>
+      <div class="zb-section">
+        <span class="zb-label lb-conseil">✅ Leviers concrets</span>
+        <div class="zb-text">
+          <p><strong>Valoriser publiquement la démarche de dépannage :</strong> "Vous avez identifié que ça ne marche pas ET trouvé pourquoi — c'est exactement la compétence du programme 2024."</p>
+          <p><strong>Évaluation formative sans note :</strong> les moments de pratique MEI ne sont pas des moments de jugement — feed-back descriptif uniquement ("tu as bien identifié la chaîne d'énergie / il manque le convertisseur").</p>
+          <p><strong>Routines prévisibles :</strong> un cadre stable et prévisible (ritual d'entrée, objectif affiché, rôles définis) réduit l'incertitude qui active l'amygdale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     07 · 3 THÈMES × SC
+══════════════════════════════════ -->
+<section id="themes">
+  <div class="s-head">
+    <div class="s-num">07</div>
+    <div class="s-title">
+      <p>Programme 2024 × Sciences cognitives</p>
+      <h2>Les 3 thèmes officiels éclairés par les sciences cognitives</h2>
+    </div>
+  </div>
+
+  <div class="th-blk">
+    <div class="th-h t1">📱 Thème 1 — OST : leurs usages et leurs interactions à découvrir et analyser</div>
+    <div class="th-b">
+      <ul>
+        <li>Analyse externe des OST : place, rôle, usages dans la société</li>
+        <li>Impacts sociaux, environnementaux, économiques — cycle de vie</li>
+        <li>Indice de réparabilité et de durabilité (nouveauté 2024)</li>
+      </ul>
+      <div class="cog-strip">
+        <div class="cog-lbl">🧠 Leviers cognitifs prioritaires</div>
+        <ul>
+          <li><strong>Encodage élaboré :</strong> choisir des OST que l'élève possède ou a utilisé — la connexion à la mémoire épisodique personnelle est le meilleur ancrage possible.</li>
+          <li><strong>Ancrage émotionnel :</strong> les enjeux de réparabilité et de transition écologique touchent les valeurs des adolescents → activation de la mémoire émotionnelle, trace plus durable. Ne pas sous-estimer ce levier.</li>
+          <li><strong>Dual-coding :</strong> frise du cycle de vie illustrée + texte + manipulation de l'objet réel → triple encodage (schématique, verbal, sensoriel).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="th-blk">
+    <div class="th-h t2">⚙️ Thème 2 — Structure, fonctionnement, comportement des OST</div>
+    <div class="th-b">
+      <ul>
+        <li>Chaînes MEI, composants (capteurs, actionneurs, microcontrôleur)</li>
+        <li>Matériaux, procédés, propriétés mécaniques</li>
+        <li>Dépannage et réparation — compétence explicite du programme 2024</li>
+        <li>Programmation d'une fonctionnalité, acquisition de données, réseaux</li>
+      </ul>
+      <div class="cog-strip">
+        <div class="cog-lbl">🧠 Leviers cognitifs prioritaires</div>
+        <ul>
+          <li><strong>Pédagogie explicite :</strong> modelage obligatoire pour câblage, programmation, usage des outils — montrer avant de faire faire, sans exception.</li>
+          <li><strong>Conflit cognitif via la réparation :</strong> l'OST défectueux est la situation-problème idéale — l'élève confronte ses représentations à la réalité. Protocole : observer → hypothèse → test → conclusion.</li>
+          <li><strong>Réduction de charge :</strong> chaîne d'énergie ET chaîne d'information = deux systèmes différents. Ne pas enseigner les deux simultanément lors d'un premier apprentissage.</li>
+          <li><strong>Pair programming :</strong> l'un code, l'autre verbalise le raisonnement → double encodage + détection immédiate des erreurs logiques.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="th-blk">
+    <div class="th-h t3">🛠️ Thème 3 — Création, conception, réalisation, innovations</div>
+    <div class="th-b">
+      <ul>
+        <li>Mini-projets et défis collaboratifs ancrés localement</li>
+        <li>FabLab : impression 3D, découpe laser, prototypage électronique</li>
+        <li>IA, cybersécurité, expérience utilisateur (nouveautés 2024)</li>
+        <li>Travail en équipe, créativité valorisée</li>
+      </ul>
+      <div class="cog-strip">
+        <div class="cog-lbl">🧠 Leviers cognitifs prioritaires</div>
+        <ul>
+          <li><strong>Mémoire épisodique :</strong> le projet crée un souvenir vécu fort et unique. Ce qu'on a conçu et fabriqué de ses mains reste gravé. Exploitation maximale de la cognition incarnée.</li>
+          <li><strong>Buts proximaux :</strong> décomposer le projet en jalons courts (maquette J+1, test J+2, démo J+5) maintient la dopamine et la motivation. Un seul objectif lointain = démotivation et perte de sens.</li>
+          <li><strong>Sketching avant CAO :</strong> le dessin à la main active la cognition incarnée et libère la créativité avant la contrainte de l'outil logiciel. Toujours esquisser à la main avant d'ouvrir le logiciel de modélisation.</li>
+          <li><strong>Portfolio de conception :</strong> trace progressive qui développe la métacognition MEI et permet la répétition espacée des notions mobilisées au fil du projet.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="hbox orange">
+    <h3>🤖 IA, cybersécurité, expérience utilisateur — traitement cognitif des nouveautés 2024</h3>
+    <ul>
+      <li><strong>IA :</strong> partir d'exemples vécus (reconnaissance faciale, recommandations) AVANT les concepts → encodage élaboré garanti. Puis : "Comment ça marche vraiment ?" crée le conflit cognitif motivant.</li>
+      <li><strong>Cybersécurité :</strong> situations-problèmes réalistes (phishing, mot de passe) → conflit entre habitudes réelles de l'élève et bonnes pratiques → accommodation forcée des représentations.</li>
+      <li><strong>Expérience utilisateur :</strong> évaluation ergonomique d'objets familiers → activer le regard analytique sur ce qui était "invisible". Précurseur de la conception centrée utilisateur du Thème 3.</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════════════════════════════
+     08 · SYNTHÈSE
+══════════════════════════════════ -->
+<section id="synthese">
+  <div class="s-head">
+    <div class="s-num">08</div>
+    <div class="s-title">
+      <p>Guide opérationnel</p>
+      <h2>Synthèse — ce qui change concrètement au quotidien</h2>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Pratique courante</th><th>Pratique éclairée (programme 2024 × SC)</th><th>Principe</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cours MEI → activité</td>
+        <td>Manipulation OST réel → formalisation MEI ensuite ("faire puis nommer")</td>
+        <td><span class="b b-vt">Embodied cognition</span></td>
+      </tr>
+      <tr>
+        <td>Nouveau logiciel dans l'activité de conception</td>
+        <td>Séance de prise en main dédiée AVANT toute tâche MEI avec ce logiciel</td>
+        <td><span class="b b-bl">Charge cognitive</span></td>
+      </tr>
+      <tr>
+        <td>Correction collective en fin de séance</td>
+        <td>Feedback individuel immédiat PENDANT l'activité, sur l'action en cours</td>
+        <td><span class="b b-or">Contiguïté temporelle</span></td>
+      </tr>
+      <tr>
+        <td>Chaque séance repart de zéro</td>
+        <td>Quiz MEI de rappel (5 min) en ouverture + lien explicite avec la séance précédente</td>
+        <td><span class="b b-og">Répétition espacée</span></td>
+      </tr>
+      <tr>
+        <td>"Vous avez compris ?"</td>
+        <td>Tâche de production courte sans support : "Trace le schéma MEI de cet objet de mémoire"</td>
+        <td><span class="b b-vi">Métacognition</span></td>
+      </tr>
+      <tr>
+        <td>Réparation = activité bonus</td>
+        <td>Réparation = situation-problème structurante (conflit cognitif) — compétence officielle 2024</td>
+        <td><span class="b b-og">Conflit cognitif</span></td>
+      </tr>
+      <tr>
+        <td>Groupes libres</td>
+        <td>Groupes hétérogènes, rôles distribués et tournants (concepteur, testeur, rapporteur…)</td>
+        <td><span class="b b-vt">Coopération structurée</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="hbox dark">
+    <h3>🚀 Les 5 gestes professionnels prioritaires</h3>
+    <ul>
+      <li><strong>1. Faire d'abord, nommer ensuite :</strong> l'OST réel sur la table AVANT le cours MEI. L'expérience crée le besoin de comprendre — pas l'inverse.</li>
+      <li><strong>2. Quiz de rappel MEI chaque début de séance :</strong> 5 min, sans support, 3–5 questions. C'est le levier de mémorisation le plus puissant disponible. La récupération consolide.</li>
+      <li><strong>3. Pédagogie explicite pour les procédures :</strong> je montre en verbalisant → on fait ensemble → tu fais seul. Sans exception pour les nouveaux gestes techniques et logiciels.</li>
+      <li><strong>4. Réduire la surcharge numérique :</strong> un logiciel = une séance de familiarisation préalable. Jamais de nouveauté logicielle ET nouveauté conceptuelle MEI le même jour.</li>
+      <li><strong>5. Exit ticket métacognitif :</strong> 2 min en fin de séance — "Ce que je sais faire / Ce qui me pose encore question sur cette chaîne MEI." Ferme la boucle et prépare la répétition espacée.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Fondé sur le <span>programme officiel technologie cycle 4 · BO n°9 du 29 février 2024</span> et le guide Éduscol (mai 2024).<br>
+  Sciences cognitives : <span>Baddeley, Sweller, Ebbinghaus, Ausubel, Paivio, Mayer, Flavell, Piaget, Rosenshine, Hattie, LeDoux, Dehaene, Bjork, Glenberg</span></p>
+</footer>
+
+<script>
+function toggle(id){
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
